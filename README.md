@@ -1,1 +1,1 @@
-# Display-Lab
+# Display-Labs
