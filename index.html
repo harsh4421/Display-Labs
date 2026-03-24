@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Display Lab – TV Repair & Installation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue:   #0f3460;
+      --blue2:  #16213e;
+      --orange: #e8530a;
+      --ora2:   #ff6b2b;
+      --light:  #f5f7fa;
+      --white:  #ffffff;
+      --text:   #2d3748;
+      --muted:  #718096;
+      --border: #e2e8f0;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+
+    /* TOP BAR */
+    .top-bar {
+      background: var(--blue2); color: #a0b4cc;
+      font-size: 0.78rem; padding: 0 4%; height: 38px;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .top-bar a { color: #a0b4cc; text-decoration: none; }
+    .top-bar a:hover { color: #fff; }
+    .tb-left, .tb-right { display: flex; align-items: center; gap: 1.8rem; }
+    .tb-sep { color: #334155; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--white); box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      padding: 0 4%; height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.55rem;
+      color: var(--blue); text-decoration: none; letter-spacing: -0.03em;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .logo-box {
+      width: 36px; height: 36px; background: var(--orange); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    }
+    .logo span { color: var(--orange); }
+    .nav-links { display: flex; list-style: none; gap: 0.1rem; }
+    .nav-links a {
+      color: var(--text); text-decoration: none;
+      font-family: 'Montserrat', sans-serif; font-weight: 600;
+      font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.45rem 0.85rem; border-radius: 4px; transition: color 0.2s, background 0.2s;
+    }
+    .nav-links a:hover { color: var(--orange); background: #fff4f0; }
+    .nav-btns { display: flex; gap: 0.7rem; align-items: center; }
+    .btn-nav-call {
+      display: flex; align-items: center; gap: 0.4rem;
+      background: var(--blue); color: #fff; font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 0.8rem; padding: 0.5rem 1.1rem;
+      border-radius: 5px; text-decoration: none; transition: background 0.2s;
+    }
+    .btn-nav-call:hover { background: var(--blue2); }
+    .btn-nav-book {
+      display: flex; align-items: center; gap: 0.4rem;
+      background: var(--orange); color: #fff; font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 0.8rem; padding: 0.5rem 1.1rem;
+      border-radius: 5px; text-decoration: none; transition: background 0.2s;
+    }
+    .btn-nav-book:hover { background: var(--ora2); }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #0a1628 0%, #0f3460 60%, #1a3a6b 100%);
+      min-height: 520px; display: flex; align-items: stretch; overflow: hidden; position: relative;
+    }
+    .hero::after {
+      content: ''; position: absolute; top: -80px; right: -80px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(232,83,10,0.12), transparent 70%);
+      border-radius: 50%; pointer-events: none;
+    }
+    .hero-inner {
+      width: 100%; padding: 0 4%;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; position: relative; z-index: 2;
+      min-height: 520px;
+    }
+    .hero-text { padding: 60px 0; }
+    .h-badge {
+      display: inline-block; background: var(--orange); color: #fff;
+      font-family: 'Montserrat', sans-serif; font-weight: 700;
+      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 0.28rem 0.85rem; border-radius: 3px; margin-bottom: 1.3rem;
+    }
+    .hero-text h1 {
+      font-family: 'Montserrat', sans-serif; font-weight: 900;
+      font-size: clamp(2rem, 4vw, 3rem); color: #fff; line-height: 1.1;
+      letter-spacing: -0.02em; margin-bottom: 1rem;
+    }
+    .hero-text h1 em { font-style: normal; color: var(--ora2); }
+    .hero-text p { color: #b8c8da; font-size: 1rem; line-height: 1.75; margin-bottom: 2rem; max-width: 410px; }
+    .h-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hbtn1 {
+      background: var(--orange); color: #fff; font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 0.9rem; padding: 0.85rem 1.8rem; border-radius: 6px;
+      text-decoration: none; letter-spacing: 0.04em; display: inline-flex; align-items: center; gap: 0.4rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .hbtn1:hover { background: var(--ora2); transform: translateY(-2px); }
+    .hbtn2 {
+      background: transparent; color: #fff; font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 0.9rem; padding: 0.85rem 1.8rem; border-radius: 6px;
+      border: 2px solid rgba(255,255,255,0.3); text-decoration: none; letter-spacing: 0.04em;
+      display: inline-flex; align-items: center; gap: 0.4rem; transition: border-color 0.2s, background 0.2s;
+    }
+    .hbtn2:hover { border-color: #fff; background: rgba(255,255,255,0.07); }
+    .h-stats { display: flex; gap: 2rem; margin-top: 2.5rem; }
+    .h-stat strong {
+      display: block; font-family: 'Montserrat', sans-serif; font-weight: 900;
+      font-size: 1.8rem; color: #fff; line-height: 1;
+    }
+    .h-stat span { font-size: 0.73rem; color: #8ba3be; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* Hero right SVG */
+    .hero-right {
+      display: flex; align-items: flex-end; justify-content: center;
+      padding-bottom: 0; position: relative;
+    }
+    .hero-svg { width: 100%; max-width: 460px; animation: floaty 5s ease-in-out infinite; }
+    @keyframes floaty {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+
+    /* QUICK STRIP */
+    .qstrip {
+      background: var(--orange);
+      display: flex; justify-content: center; flex-wrap: wrap;
+    }
+    .qs {
+      display: flex; align-items: center; gap: 0.7rem;
+      padding: 1rem 2.2rem; color: #fff; text-decoration: none;
+      font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.85rem;
+      border-right: 1px solid rgba(255,255,255,0.22); transition: background 0.2s;
+    }
+    .qs:last-child { border-right: none; }
+    .qs:hover { background: rgba(0,0,0,0.1); }
+    .qs-ico { font-size: 1.25rem; }
+    .qs-lbl { font-size: 0.66rem; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.08em; display: block; }
+    .qs-val { font-size: 0.88rem; font-weight: 700; }
+
+    /* SECTION */
+    section { padding: 72px 4%; }
+    .sh { text-align: center; margin-bottom: 3rem; }
+    .sh-tag {
+      display: inline-block; color: var(--orange);
+      font-family: 'Montserrat', sans-serif; font-weight: 700;
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.6rem;
+    }
+    .sh h2 {
+      font-family: 'Montserrat', sans-serif; font-weight: 900;
+      font-size: clamp(1.6rem, 3vw, 2.3rem); color: var(--blue);
+      letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 0.7rem;
+    }
+    .sh p { color: var(--muted); font-size: 0.93rem; max-width: 500px; margin: 0 auto; }
+    .divider { width: 48px; height: 4px; background: var(--orange); border-radius: 2px; margin: 0.9rem auto 0; }
+
+    /* SERVICES */
+    #services { background: var(--light); }
+    .svc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.5rem; }
+    .svc-card {
+      background: var(--white); border-radius: 12px; overflow: hidden;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .svc-card:hover { transform: translateY(-6px); box-shadow: 0 14px 40px rgba(0,0,0,0.12); }
+    .svc-thumb { height: 165px; position: relative; overflow: hidden; }
+    .svc-thumb svg { width: 100%; height: 100%; }
+    .svc-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,52,96,0.65), transparent 55%); }
+    .svc-body { padding: 1.25rem 1.4rem; }
+    .svc-body h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.98rem; color: var(--blue); margin-bottom: 0.4rem; }
+    .svc-body p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 0.85rem; }
+    .svc-lnk {
+      color: var(--orange); font-family: 'Montserrat', sans-serif; font-weight: 700;
+      font-size: 0.76rem; text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 0.25rem; transition: gap 0.2s;
+    }
+    .svc-lnk:hover { gap: 0.55rem; }
+
+    /* WHY US */
+    #why { background: var(--white); display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .why-vis {
+      border-radius: 16px; overflow: hidden; background: var(--blue2);
+      min-height: 380px; display: flex; align-items: center; justify-content: center;
+    }
+    .why-vis svg { width: 100%; }
+    .why-tx .sh-tag { display: block; text-align: left; }
+    .why-tx h2 {
+      font-family: 'Montserrat', sans-serif; font-weight: 900;
+      font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--blue);
+      line-height: 1.2; margin-bottom: 0.9rem;
+    }
+    .why-tx > p { color: var(--muted); font-size: 0.9rem; line-height: 1.8; margin-bottom: 1.5rem; }
+    .why-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+    .wi { display: flex; align-items: flex-start; gap: 1rem; }
+    .wi-ico {
+      width: 44px; height: 44px; flex-shrink: 0; background: #fff4f0;
+      border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+    }
+    .wi-tx h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--blue); margin-bottom: 0.2rem; }
+    .wi-tx p { font-size: 0.82rem; color: var(--muted); }
+    .btn-orange {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--orange); color: #fff; font-family: 'Montserrat', sans-serif;
+      font-weight: 800; font-size: 0.92rem; padding: 0.85rem 2rem; border-radius: 6px;
+      text-decoration: none; letter-spacing: 0.04em; transition: background 0.2s, transform 0.15s;
+    }
+    .btn-orange:hover { background: var(--ora2); transform: translateY(-2px); }
+
+    /* HOW IT WORKS */
+    #how { background: var(--blue); }
+    #how .sh h2 { color: #fff; }
+    #how .sh p { color: #8ba3be; }
+    #how .sh-tag { color: var(--ora2); }
+    .steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; position: relative; }
+    .steps::before {
+      content: ''; position: absolute; top: 34px; left: 12.5%; right: 12.5%;
+      height: 2px; background: rgba(255,255,255,0.1); z-index: 0;
+    }
+    .step { text-align: center; padding: 1.8rem 1rem; position: relative; z-index: 1; }
+    .step-num {
+      width: 68px; height: 68px; border-radius: 50%; background: var(--orange); color: #fff;
+      font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.4rem;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.2rem; box-shadow: 0 4px 20px rgba(232,83,10,0.35);
+    }
+    .step h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.93rem; color: #fff; margin-bottom: 0.5rem; }
+    .step p { font-size: 0.82rem; color: #8ba3be; line-height: 1.6; }
+
+    /* PRICING */
+    #pricing { background: var(--light); }
+    .price-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 2.5rem; align-items: start; }
+    .pc {
+      background: var(--blue); border-radius: 16px; padding: 2.5rem; color: #fff;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .pc::before {
+      content: ''; position: absolute; top: -50px; right: -50px;
+      width: 180px; height: 180px; background: rgba(255,255,255,0.04); border-radius: 50%;
+    }
+    .pc-lbl { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #8ba3be; margin-bottom: 1rem; }
+    .pc-amt { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 4.5rem; color: var(--ora2); line-height: 1; margin-bottom: 0.3rem; }
+    .pc-amt sup { font-size: 2rem; vertical-align: super; }
+    .pc-sub { font-size: 0.84rem; color: #8ba3be; margin-bottom: 1.8rem; }
+    .pc-list { list-style: none; text-align: left; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+    .pc-list li { display: flex; align-items: center; gap: 0.7rem; font-size: 0.88rem; }
+    .pc-list li::before {
+      content: '✓'; width: 22px; height: 22px;
+      background: rgba(255,107,43,0.2); border: 1px solid var(--orange); border-radius: 50%;
+      color: var(--ora2); font-size: 0.72rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .pc-btn {
+      display: block; background: var(--orange); color: #fff;
+      font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.95rem;
+      padding: 0.9rem; border-radius: 8px; text-decoration: none; letter-spacing: 0.04em;
+      transition: background 0.2s;
+    }
+    .pc-btn:hover { background: var(--ora2); }
+    .pd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .pd {
+      background: var(--white); border-radius: 12px; padding: 1.4rem;
+      border-left: 4px solid var(--orange); box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .pd h4 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.9rem; color: var(--blue); margin-bottom: 0.4rem; }
+    .pd p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+    /* CONTACT */
+    #contact { background: var(--white); }
+    .ct-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start; }
+    .ct-info h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.25rem; color: var(--blue); margin-bottom: 0.5rem; }
+    .ct-info > p { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.8rem; }
+    .ct-methods { display: flex; flex-direction: column; gap: 1rem; }
+    .cm {
+      display: flex; align-items: center; gap: 1.2rem;
+      padding: 1.2rem 1.4rem; border: 1px solid var(--border); border-radius: 12px;
+      text-decoration: none; color: var(--text); transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .cm:hover { border-color: var(--orange); box-shadow: 0 4px 18px rgba(232,83,10,0.09); }
+    .cm-ico {
+      width: 48px; height: 48px; flex-shrink: 0; background: #fff4f0;
+      border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+    }
+    .cm-inf { flex: 1; }
+    .cm-lbl { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); font-family: 'Montserrat', sans-serif; font-weight: 700; margin-bottom: 0.15rem; }
+    .cm-val { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.93rem; color: var(--blue); }
+    .cm-dsc { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+    .cm-ar { color: var(--muted); font-size: 1.1rem; }
+
+    /* FORM */
+    .ct-form { background: var(--light); border-radius: 16px; padding: 2.2rem; }
+    .ct-form h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.15rem; color: var(--blue); margin-bottom: 0.3rem; }
+    .ct-form .fsub-lbl { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .fg { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+    .fg label { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); }
+    .fg input, .fg select, .fg textarea {
+      background: var(--white); border: 1.5px solid var(--border); border-radius: 8px;
+      color: var(--text); font-family: 'Open Sans', sans-serif; font-size: 0.92rem;
+      padding: 0.7rem 1rem; outline: none; transition: border-color 0.2s; width: 100%;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--orange); }
+    .fg textarea { resize: vertical; min-height: 90px; }
+    .fsub-btn {
+      width: 100%; background: var(--orange); color: #fff;
+      font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.93rem;
+      letter-spacing: 0.06em; text-transform: uppercase; padding: 0.9rem;
+      border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .fsub-btn:hover { background: var(--ora2); transform: translateY(-2px); }
+    .f-done { display: none; text-align: center; padding: 3rem 1rem; }
+    .f-done .tick { width: 62px; height: 62px; background: #e8f5e9; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin: 0 auto 1rem; }
+    .f-done h4 { font-family: 'Montserrat', sans-serif; font-weight: 800; color: var(--blue); font-size: 1.1rem; margin-bottom: 0.4rem; }
+    .f-done p { font-size: 0.85rem; color: var(--muted); }
+
+    /* FOOTER */
+    footer { background: var(--blue2); color: #8ba3be; }
+    .ft-main { padding: 50px 4%; display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 2.5rem; }
+    .ft-brand .logo { margin-bottom: 1rem; }
+    .ft-brand p { font-size: 0.84rem; line-height: 1.7; color: #6b80a0; }
+    .ft-social { display: flex; gap: 0.6rem; margin-top: 1rem; }
+    .ft-s {
+      width: 34px; height: 34px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; font-size: 1rem;
+    }
+    .ft-col h5 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.84rem; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; margin-bottom: 1.2rem; }
+    .ft-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .ft-col ul li a { font-size: 0.82rem; color: #6b80a0; text-decoration: none; transition: color 0.2s; }
+    .ft-col ul li a:hover { color: var(--ora2); }
+    .ft-ci { display: flex; align-items: flex-start; gap: 0.7rem; font-size: 0.82rem; color: #6b80a0; margin-bottom: 0.7rem; }
+    .ft-ci-ico { flex-shrink: 0; font-size: 0.95rem; margin-top: 0.1rem; }
+    .ft-bot { border-top: 1px solid #1e2d40; padding: 1.2rem 4%; display: flex; justify-content: space-between; align-items: center; font-size: 0.77rem; color: #4a6280; flex-wrap: wrap; gap: 0.5rem; }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      #why { grid-template-columns: 1fr; }
+      .why-vis { min-height: 240px; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .steps::before { display: none; }
+      .price-layout { grid-template-columns: 1fr; }
+      .ct-layout { grid-template-columns: 1fr; }
+      .ft-main { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+      .tb-right { display: none; }
+    }
+    @media (max-width: 600px) {
+      .pd-grid, .frow { grid-template-columns: 1fr; }
+      .ft-main { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .qs { padding: 0.8rem 1.2rem; }
+      .h-stats { gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="tb-left">
+    <span>📞 <a href="tel:+919999999999">+91 99999 99999</a></span>
+    <span class="tb-sep">|</span>
+    <span>✉️ <a href="mailto:hello@displaylab.in">hello@displaylab.in</a></span>
+  </div>
+  <div class="tb-right">
+    <span>🕘 Mon–Sat: 9 AM – 8 PM</span>
+    <span class="tb-sep">|</span>
+    <span>📍 Mumbai, Maharashtra</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#home">
+    <div class="logo-box">📺</div>
+    Display<span>Lab</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-btns">
+    <a class="btn-nav-call" href="tel:+919999999999">📞 Call Now</a>
+    <a class="btn-nav-book" href="#contact">Book a Visit</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="h-badge">Mumbai's Trusted TV Experts</div>
+      <h1>Professional<br>TV Repair &amp;<br><em>Home Services</em></h1>
+      <p>Certified technicians at your doorstep. We diagnose, repair and install any TV — any brand, any problem.</p>
+      <div class="h-btns">
+        <a class="hbtn1" href="#contact">📅 Book a Technician</a>
+        <a class="hbtn2" href="https://wa.me/919999999999" target="_blank">💬 WhatsApp Us</a>
+      </div>
+      <div class="h-stats">
+        <div class="h-stat"><strong>500+</strong><span>TVs Repaired</span></div>
+        <div class="h-stat"><strong>5 ★</strong><span>Customer Rating</span></div>
+        <div class="h-stat"><strong>30-Day</strong><span>Warranty</span></div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <!-- Technician + TV SVG illustration -->
+      <svg class="hero-svg" viewBox="0 0 500 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Floor shadow -->
+        <ellipse cx="250" cy="428" rx="195" ry="10" fill="rgba(0,0,0,0.28)"/>
+
+        <!-- TV Body -->
+        <rect x="50" y="55" width="400" height="290" rx="18" fill="#0f3460" stroke="#1e4d8c" stroke-width="2"/>
+        <rect x="65" y="70" width="370" height="260" rx="10" fill="#071020"/>
+        <rect x="74" y="78" width="352" height="244" rx="7" fill="url(#sg)"/>
+
+        <!-- Screen Content -->
+        <text x="250" y="145" text-anchor="middle" font-family="Montserrat,sans-serif" font-weight="900" font-size="22" fill="#ffffff">Display Lab</text>
+        <text x="250" y="170" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#8ba3be">TV Repair &amp; Home Services</text>
+
+        <!-- Service icon grid -->
+        <g transform="translate(95,188)">
+          <rect width="64" height="60" rx="7" fill="rgba(232,83,10,0.15)" stroke="rgba(232,83,10,0.35)" stroke-width="1"/>
+          <text x="32" y="34" text-anchor="middle" font-size="22">🔧</text>
+          <text x="32" y="52" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#8ba3be">Repair</text>
+        </g>
+        <g transform="translate(170,188)">
+          <rect width="64" height="60" rx="7" fill="rgba(232,83,10,0.15)" stroke="rgba(232,83,10,0.35)" stroke-width="1"/>
+          <text x="32" y="34" text-anchor="middle" font-size="22">📡</text>
+          <text x="32" y="52" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#8ba3be">Install</text>
+        </g>
+        <g transform="translate(245,188)">
+          <rect width="64" height="60" rx="7" fill="rgba(232,83,10,0.15)" stroke="rgba(232,83,10,0.35)" stroke-width="1"/>
+          <text x="32" y="34" text-anchor="middle" font-size="22">🌐</text>
+          <text x="32" y="52" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#8ba3be">Smart TV</text>
+        </g>
+        <g transform="translate(320,188)">
+          <rect width="64" height="60" rx="7" fill="rgba(232,83,10,0.15)" stroke="rgba(232,83,10,0.35)" stroke-width="1"/>
+          <text x="32" y="34" text-anchor="middle" font-size="22">⚡</text>
+          <text x="32" y="52" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#8ba3be">Power Fix</text>
+        </g>
+
+        <!-- Bottom info bar on screen -->
+        <rect x="80" y="265" width="340" height="50" rx="5" fill="rgba(232,83,10,0.08)" stroke="rgba(232,83,10,0.2)" stroke-width="1"/>
+        <circle cx="112" cy="290" r="18" fill="rgba(232,83,10,0.2)" stroke="#e8530a" stroke-width="1.5"/>
+        <text x="112" y="296" text-anchor="middle" font-size="14">✓</text>
+        <rect x="140" y="281" width="90" height="8" rx="4" fill="rgba(255,255,255,0.15)"/>
+        <rect x="140" y="295" width="60" height="7" rx="3.5" fill="rgba(255,255,255,0.08)"/>
+        <text x="385" y="295" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="9" fill="#e8530a" font-weight="700">BOOK NOW →</text>
+
+        <!-- Corner accents -->
+        <path d="M65 92 L65 70 L90 70" stroke="#e8530a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <path d="M435 92 L435 70 L410 70" stroke="#e8530a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <path d="M65 322 L65 344 L90 344" stroke="#e8530a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <path d="M435 322 L435 344 L410 344" stroke="#e8530a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+        <!-- TV Stand -->
+        <polygon points="215,345 285,345 265,378 235,378" fill="#0f3460"/>
+        <rect x="195" y="376" width="110" height="10" rx="5" fill="#0f3460" stroke="#1e4d8c" stroke-width="1"/>
+        <circle cx="250" cy="382" r="3.5" fill="#e8530a" opacity="0.7"/>
+
+        <!-- Technician (right side, next to TV) -->
+        <g transform="translate(355, 42)">
+          <!-- Head -->
+          <circle cx="52" cy="48" r="26" fill="#f5c09a"/>
+          <!-- Hard hat -->
+          <ellipse cx="52" cy="32" rx="32" ry="7" fill="#e8530a"/>
+          <rect x="22" y="25" width="60" height="13" rx="5" fill="#e8530a"/>
+          <!-- Eyes -->
+          <circle cx="43" cy="47" r="3" fill="#6b3a1e"/>
+          <circle cx="61" cy="47" r="3" fill="#6b3a1e"/>
+          <!-- Smile -->
+          <path d="M44 57 Q52 64 60 57" stroke="#c4834a" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <!-- Neck -->
+          <rect x="44" y="72" width="16" height="14" rx="4" fill="#f5c09a"/>
+          <!-- Uniform body -->
+          <rect x="16" y="84" width="72" height="104" rx="10" fill="#1e3a5f"/>
+          <!-- Shirt collar / tie strip -->
+          <polygon points="48,84 56,84 52,100" fill="#e8e8e8"/>
+          <!-- Tool belt -->
+          <rect x="22" y="154" width="56" height="10" rx="5" fill="#e8530a"/>
+          <rect x="47" y="151" width="12" height="16" rx="3" fill="#c9500a"/>
+          <!-- Left arm + screwdriver toward TV -->
+          <rect x="-6" y="88" width="26" height="14" rx="7" fill="#1e3a5f" transform="rotate(-18, 7, 95)"/>
+          <circle cx="-8" cy="120" r="9" fill="#f5c09a"/>
+          <rect x="-15" y="125" width="3.5" height="26" rx="1.5" fill="#999" transform="rotate(-15,-13,125)"/>
+          <rect x="-18" y="118" width="9" height="10" rx="2" fill="#f5a623" transform="rotate(-15,-13,118)"/>
+          <!-- Right arm with clipboard -->
+          <rect x="74" y="88" width="26" height="14" rx="7" fill="#1e3a5f" transform="rotate(18, 87, 95)"/>
+          <circle cx="100" cy="120" r="9" fill="#f5c09a"/>
+          <rect x="98" y="116" width="24" height="32" rx="4" fill="#e8e0d0"/>
+          <rect x="101" y="120" width="18" height="2" rx="1" fill="#888"/>
+          <rect x="101" y="125" width="14" height="2" rx="1" fill="#888"/>
+          <rect x="101" y="130" width="16" height="2" rx="1" fill="#888"/>
+          <!-- Legs -->
+          <rect x="24" y="186" width="22" height="72" rx="9" fill="#1e3a5f"/>
+          <rect x="52" y="186" width="22" height="72" rx="9" fill="#1e3a5f"/>
+          <!-- Boots -->
+          <rect x="18" y="250" width="28" height="14" rx="5" fill="#1a1a2e"/>
+          <rect x="50" y="250" width="28" height="14" rx="5" fill="#1a1a2e"/>
+        </g>
+
+        <defs>
+          <linearGradient id="sg" x1="74" y1="78" x2="426" y2="322" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#0d1f38"/>
+            <stop offset="100%" stop-color="#060d1a"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK STRIP -->
+<div class="qstrip">
+  <a class="qs" href="tel:+919999999999">
+    <span class="qs-ico">📞</span>
+    <div><span class="qs-lbl">Call Us</span><span class="qs-val">+91 99999 99999</span></div>
+  </a>
+  <a class="qs" href="https://wa.me/919999999999" target="_blank">
+    <span class="qs-ico">💬</span>
+    <div><span class="qs-lbl">WhatsApp</span><span class="qs-val">Quick Replies 24/7</span></div>
+  </a>
+  <a class="qs" href="mailto:hello@displaylab.in">
+    <span class="qs-ico">✉️</span>
+    <div><span class="qs-lbl">Email Us</span><span class="qs-val">hello@displaylab.in</span></div>
+  </a>
+  <a class="qs" href="#contact">
+    <span class="qs-ico">📅</span>
+    <div><span class="qs-lbl">Book Online</span><span class="qs-val">Fill Enquiry Form</span></div>
+  </a>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="sh reveal">
+    <p class="sh-tag">What We Offer</p>
+    <h2>Our Services</h2>
+    <p>We handle every TV-related need at your home — from diagnosis to full repair and professional installation.</p>
+    <div class="divider"></div>
+  </div>
+
+  <div class="svc-grid reveal">
+
+    <div class="svc-card">
+      <div class="svc-thumb">
+        <svg viewBox="0 0 300 165" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="165" fill="#0a1628"/>
+          <rect x="28" y="18" width="200" height="118" rx="8" fill="#0f3460" stroke="#1e4d8c" stroke-width="1.5"/>
+          <rect x="37" y="27" width="182" height="100" rx="5" fill="#071020"/>
+          <line x1="128" y1="27" x2="108" y2="127" stroke="#e8530a" stroke-width="2" opacity="0.8"/>
+          <line x1="128" y1="27" x2="158" y2="87" stroke="#e8530a" stroke-width="1.2" opacity="0.6"/>
+          <line x1="108" y1="77" x2="155" y2="87" stroke="#e8530a" stroke-width="1" opacity="0.5"/>
+          <text x="245" y="80" font-size="36" text-anchor="middle">🔧</text>
+        </svg>
+        <div class="svc-overlay"></div>
+      </div>
+      <div class="svc-body">
+        <h3>📺 TV Repair</h3>
+        <p>Cracked screen, no display, flickering, dead pixels, sound issues — all brands repaired on-site.</p>
+        <a class="svc-lnk" href="#contact">Book Now →</a>
+      </div>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-thumb">
+        <svg viewBox="0 0 300 165" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="165" fill="#0a1628"/>
+          <rect x="0" y="28" width="300" height="137" fill="#1a2744"/>
+          <rect x="100" y="50" width="100" height="7" rx="3.5" fill="#e8530a"/>
+          <rect x="140" y="57" width="20" height="22" rx="3" fill="#e8530a"/>
+          <rect x="55" y="75" width="185" height="100" rx="7" fill="#0f3460" stroke="#1e4d8c" stroke-width="1.2"/>
+          <rect x="64" y="83" width="167" height="84" rx="4" fill="#071020"/>
+          <rect x="71" y="89" width="153" height="72" rx="3" fill="#0d1f38"/>
+          <text x="148" y="130" text-anchor="middle" font-size="26">📺</text>
+          <circle cx="57" cy="78" r="3" fill="#555"/><circle cx="239" cy="78" r="3" fill="#555"/>
+        </svg>
+        <div class="svc-overlay"></div>
+      </div>
+      <div class="svc-body">
+        <h3>🪛 Wall Mount & Installation</h3>
+        <p>Professional wall mounting, cable management, antenna and set-top box configuration.</p>
+        <a class="svc-lnk" href="#contact">Book Now →</a>
+      </div>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-thumb">
+        <svg viewBox="0 0 300 165" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="165" fill="#0a1628"/>
+          <rect x="28" y="12" width="244" height="134" rx="8" fill="#0f3460" stroke="#1e4d8c" stroke-width="1.5"/>
+          <rect x="37" y="20" width="226" height="117" rx="5" fill="#071020"/>
+          <circle cx="150" cy="112" r="5.5" fill="#4a90d9"/>
+          <path d="M126,94 Q150,70 174,94" stroke="#4a90d9" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.8"/>
+          <path d="M108,76 Q150,44 192,76" stroke="#4a90d9" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.55"/>
+          <path d="M90,58 Q150,18 210,58" stroke="#4a90d9" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.35"/>
+          <rect x="42" y="34" width="26" height="26" rx="5" fill="#e50914" opacity="0.9"/>
+          <text x="55" y="51" text-anchor="middle" font-size="13">▶</text>
+          <rect x="76" y="34" width="26" height="26" rx="5" fill="#1db954" opacity="0.9"/>
+          <text x="89" y="51" text-anchor="middle" font-size="12">♪</text>
+          <rect x="110" y="34" width="26" height="26" rx="5" fill="#0063e5" opacity="0.9"/>
+          <text x="123" y="51" text-anchor="middle" font-size="12">⊞</text>
+        </svg>
+        <div class="svc-overlay"></div>
+      </div>
+      <div class="svc-body">
+        <h3>🌐 Smart TV Setup</h3>
+        <p>Wi-Fi setup, streaming apps, screen mirroring, OTA updates and connectivity troubleshooting.</p>
+        <a class="svc-lnk" href="#contact">Book Now →</a>
+      </div>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-thumb">
+        <svg viewBox="0 0 300 165" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="165" fill="#0a1628"/>
+          <rect x="18" y="18" width="264" height="130" rx="8" fill="#0d2010"/>
+          <line x1="18" y1="56" x2="282" y2="56" stroke="#1a5c20" stroke-width="0.5" opacity="0.4"/>
+          <line x1="18" y1="83" x2="282" y2="83" stroke="#1a5c20" stroke-width="0.5" opacity="0.4"/>
+          <line x1="18" y1="110" x2="282" y2="110" stroke="#1a5c20" stroke-width="0.5" opacity="0.4"/>
+          <line x1="65" y1="18" x2="65" y2="148" stroke="#1a5c20" stroke-width="0.5" opacity="0.4"/>
+          <line x1="125" y1="18" x2="125" y2="148" stroke="#1a5c20" stroke-width="0.5" opacity="0.4"/>
+          <line x1="185" y1="18" x2="185" y2="148" stroke="#1a5c20" stroke-width="0.5" opacity="0.4"/>
+          <line x1="238" y1="18" x2="238" y2="148" stroke="#1a5c20" stroke-width="0.5" opacity="0.4"/>
+          <rect x="52" y="46" width="28" height="14" rx="3" fill="#2d8a2d"/>
+          <rect x="112" y="74" width="28" height="14" rx="3" fill="#2d8a2d"/>
+          <rect x="172" y="46" width="28" height="14" rx="3" fill="#e8530a" opacity="0.9"/>
+          <circle cx="238" cy="83" r="13" fill="none" stroke="#e8530a" stroke-width="2"/>
+          <text x="238" y="88" text-anchor="middle" font-size="13">⚡</text>
+          <rect x="78" y="96" width="11" height="22" rx="3" fill="#4a90d9"/>
+          <rect x="96" y="96" width="11" height="22" rx="3" fill="#4a90d9"/>
+        </svg>
+        <div class="svc-overlay"></div>
+      </div>
+      <div class="svc-body">
+        <h3>⚡ Power Board Repair</h3>
+        <p>TV won't turn on? We replace faulty power boards, capacitors and mainboards with warranty.</p>
+        <a class="svc-lnk" href="#contact">Book Now →</a>
+      </div>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-thumb">
+        <svg viewBox="0 0 300 165" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="165" fill="#0a1628"/>
+          <rect x="22" y="18" width="256" height="130" rx="8" fill="#0f3460" stroke="#1e4d8c" stroke-width="1.5"/>
+          <rect x="31" y="26" width="238" height="113" rx="5" fill="#071020"/>
+          <rect x="31" y="26" width="119" height="113" fill="#0a2240" opacity="0.6"/>
+          <line x1="150" y1="26" x2="150" y2="139" stroke="#e8530a" stroke-width="2" stroke-dasharray="4,3"/>
+          <rect x="150" y="26" width="119" height="113" fill="#0d2d5c" opacity="0.8"/>
+          <text x="92" y="88" text-anchor="middle" font-size="26" opacity="0.35">❌</text>
+          <text x="208" y="88" text-anchor="middle" font-size="26">✨</text>
+          <text x="92" y="126" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#8ba3be">OLD PANEL</text>
+          <text x="205" y="126" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#4a90d9">NEW PANEL</text>
+        </svg>
+        <div class="svc-overlay"></div>
+      </div>
+      <div class="svc-body">
+        <h3>🖥️ Panel Replacement</h3>
+        <p>Cracked or broken display panels replaced with genuine or quality compatible parts under warranty.</p>
+        <a class="svc-lnk" href="#contact">Book Now →</a>
+      </div>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-thumb">
+        <svg viewBox="0 0 300 165" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="165" fill="#0a1628"/>
+          <rect x="22" y="18" width="256" height="130" rx="8" fill="#0f3460" stroke="#1e4d8c" stroke-width="1.5"/>
+          <rect x="31" y="26" width="238" height="113" rx="5" fill="#071020"/>
+          <circle cx="130" cy="85" r="40" fill="none" stroke="#e8530a" stroke-width="3" opacity="0.85"/>
+          <circle cx="130" cy="85" r="32" fill="rgba(232,83,10,0.06)"/>
+          <line x1="158" y1="113" x2="194" y2="148" stroke="#e8530a" stroke-width="5" stroke-linecap="round"/>
+          <rect x="110" y="74" width="40" height="22" rx="4" fill="#0f3460" stroke="#4a90d9" stroke-width="1"/>
+          <circle cx="120" cy="85" r="3" fill="#e8530a"/>
+          <circle cx="145" cy="85" r="3" fill="#4a90d9"/>
+          <text x="220" y="62" text-anchor="middle" font-size="28">🔍</text>
+        </svg>
+        <div class="svc-overlay"></div>
+      </div>
+      <div class="svc-body">
+        <h3>🔍 Free Diagnosis</h3>
+        <p>Not sure what's wrong? We visit, diagnose the issue and walk you through the best repair options.</p>
+        <a class="svc-lnk" href="#contact">Book Now →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section id="why">
+  <div class="why-vis reveal">
+    <svg viewBox="0 0 460 400" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:400px;">
+      <rect width="460" height="400" fill="#0f3460"/>
+      <circle cx="360" cy="75" r="95" fill="rgba(255,255,255,0.03)"/>
+      <circle cx="75" cy="330" r="75" fill="rgba(232,83,10,0.06)"/>
+      <path d="M230 35 L345 82 L345 200 Q345 285 230 342 Q115 285 115 200 L115 82 Z" fill="rgba(232,83,10,0.1)" stroke="rgba(232,83,10,0.4)" stroke-width="2"/>
+      <circle cx="230" cy="155" r="48" fill="rgba(232,83,10,0.2)" stroke="#e8530a" stroke-width="2"/>
+      <text x="230" y="170" text-anchor="middle" font-size="38">✓</text>
+      <g transform="translate(140, 232)">
+        <rect width="78" height="28" rx="6" fill="rgba(255,255,255,0.08)"/>
+        <text x="39" y="19" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="8.5" fill="#fff" font-weight="600">30-Day Warranty</text>
+      </g>
+      <g transform="translate(242, 232)">
+        <rect width="78" height="28" rx="6" fill="rgba(255,255,255,0.08)"/>
+        <text x="39" y="19" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="8.5" fill="#fff" font-weight="600">Certified Techs</text>
+      </g>
+      <g transform="translate(140, 268)">
+        <rect width="78" height="28" rx="6" fill="rgba(255,255,255,0.08)"/>
+        <text x="39" y="19" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="8.5" fill="#fff" font-weight="600">Same-Day Visit</text>
+      </g>
+      <g transform="translate(242, 268)">
+        <rect width="78" height="28" rx="6" fill="rgba(255,255,255,0.08)"/>
+        <text x="39" y="19" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="8.5" fill="#fff" font-weight="600">All Brands</text>
+      </g>
+      <text x="230" y="356" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="8.5" fill="#8ba3be" letter-spacing="2.5">SAMSUNG · LG · SONY · TCL · MI · VU · ONIDA</text>
+      <text x="230" y="385" text-anchor="middle" font-size="18" letter-spacing="5">⭐⭐⭐⭐⭐</text>
+    </svg>
+  </div>
+
+  <div class="why-tx reveal">
+    <span class="sh-tag">Why Choose Us</span>
+    <h2>Quality Repair,<br>Fair Pricing &amp;<br>Your Convenience</h2>
+    <p>We bring the repair shop to your living room. Our certified technicians handle everything on-site — no need to disconnect, pack or carry your TV anywhere.</p>
+    <div class="why-list">
+      <div class="wi"><div class="wi-ico">⚡</div><div class="wi-tx"><h4>Same-Day & Scheduled Visits</h4><p>Book any time slot that suits you. Urgent repairs handled the same day.</p></div></div>
+      <div class="wi"><div class="wi-ico">🛡️</div><div class="wi-tx"><h4>30-Day Repair Warranty</h4><p>Every repair comes with a 30-day guarantee. Same issue returns? We fix it free.</p></div></div>
+      <div class="wi"><div class="wi-ico">📺</div><div class="wi-tx"><h4>All Brands & Models</h4><p>Samsung, LG, Sony, TCL, Mi, Onida, VU — every brand, every screen size.</p></div></div>
+      <div class="wi"><div class="wi-ico">💰</div><div class="wi-tx"><h4>Transparent Pricing</h4><p>Full quote before work begins. No hidden charges — pay only when satisfied.</p></div></div>
+    </div>
+    <a class="btn-orange" href="#contact">📅 Book a Technician</a>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="sh reveal">
+    <p class="sh-tag">The Process</p>
+    <h2 style="color:#fff;">How It Works</h2>
+    <p style="color:#8ba3be;">Getting your TV repaired has never been this easy.</p>
+    <div class="divider"></div>
+  </div>
+  <div class="steps reveal">
+    <div class="step"><div class="step-num">1</div><h3>Contact Us</h3><p>Call, WhatsApp or fill our online enquiry form with your TV issue and address.</p></div>
+    <div class="step"><div class="step-num">2</div><h3>Confirm Booking</h3><p>We schedule a visit and assign the right technician for your TV brand and issue.</p></div>
+    <div class="step"><div class="step-num">3</div><h3>Technician Visits</h3><p>Expert arrives at your home, diagnoses the problem and gives you a full cost estimate.</p></div>
+    <div class="step"><div class="step-num">4</div><h3>TV Fixed & Done</h3><p>Repair completed on-site. Pay only after the job is done and you're fully satisfied.</p></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="sh reveal">
+    <p class="sh-tag">Transparent Pricing</p>
+    <h2>No Hidden Charges, Ever</h2>
+    <p>Clear, upfront pricing so you know exactly what to expect before the technician arrives.</p>
+    <div class="divider"></div>
+  </div>
+  <div class="price-layout reveal">
+    <div class="pc">
+      <div class="pc-lbl">Home Visit Charge</div>
+      <div class="pc-amt"><sup>₹</sup>299</div>
+      <div class="pc-sub">One-time visit fee — covers travel to your location</div>
+      <ul class="pc-list">
+        <li>Technician travels to your home</li>
+        <li>Full on-site diagnosis included</li>
+        <li>Repair quote before work starts</li>
+        <li>Covers all areas within the city</li>
+        <li>Fee waived on confirmed repair</li>
+      </ul>
+      <a class="pc-btn" href="#contact">Book a Visit Now</a>
+    </div>
+    <div class="pd-grid">
+      <div class="pd"><h4>🔧 Repair Costs</h4><p>Repair charges depend on the issue and parts. A full quote is provided before any work starts.</p></div>
+      <div class="pd"><h4>📦 Spare Parts</h4><p>Genuine or quality compatible parts used. All replaced parts carry a 30-day replacement warranty.</p></div>
+      <div class="pd"><h4>💳 Payment Options</h4><p>Cash, UPI (GPay, PhonePe, Paytm) and bank transfer accepted. Pay only after job is complete.</p></div>
+      <div class="pd"><h4>📍 Service Area</h4><p>We cover all of Mumbai and nearby suburbs. Call us to confirm coverage for your area.</p></div>
+      <div class="pd"><h4>🛡️ 30-Day Warranty</h4><p>Every repair is backed by a 30-day warranty. Same issue recurs? We fix it at no extra charge.</p></div>
+      <div class="pd"><h4>⚡ Same-Day Service</h4><p>Urgent repairs available based on technician availability. Call to check same-day slots.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background: var(--light);">
+  <div class="sh reveal">
+    <p class="sh-tag">Get In Touch</p>
+    <h2>Contact Us</h2>
+    <p>Reach out via any channel — we'll confirm your booking quickly.</p>
+    <div class="divider"></div>
+  </div>
+  <div class="ct-layout reveal">
+    <div>
+      <div class="ct-info">
+        <h3>We're Here to Help</h3>
+        <p>Have a question about your TV? Not sure which service you need? Just reach out — we'll guide you through everything.</p>
+      </div>
+      <div class="ct-methods">
+        <a class="cm" href="tel:+919999999999">
+          <div class="cm-ico">📞</div>
+          <div class="cm-inf"><div class="cm-lbl">Phone Call</div><div class="cm-val">+91 99999 99999</div><div class="cm-dsc">Mon – Sat, 9 AM – 8 PM</div></div>
+          <span class="cm-ar">›</span>
+        </a>
+        <a class="cm" href="https://wa.me/919999999999" target="_blank">
+          <div class="cm-ico">💬</div>
+          <div class="cm-inf"><div class="cm-lbl">WhatsApp</div><div class="cm-val">+91 99999 99999</div><div class="cm-dsc">Message anytime — fast replies</div></div>
+          <span class="cm-ar">›</span>
+        </a>
+        <a class="cm" href="mailto:hello@displaylab.in">
+          <div class="cm-ico">✉️</div>
+          <div class="cm-inf"><div class="cm-lbl">Email</div><div class="cm-val">hello@displaylab.in</div><div class="cm-dsc">Reply within 2–4 business hours</div></div>
+          <span class="cm-ar">›</span>
+        </a>
+        <div class="cm">
+          <div class="cm-ico">📍</div>
+          <div class="cm-inf"><div class="cm-lbl">Service Area</div><div class="cm-val">Mumbai, Maharashtra</div><div class="cm-dsc">Home visits across the city &amp; suburbs</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ct-form">
+      <h3>Send an Enquiry</h3>
+      <p class="fsub-lbl">Fill in your details and we'll contact you to confirm your visit.</p>
+      <div id="the-form">
+        <div class="frow">
+          <div class="fg"><label>Full Name *</label><input type="text" id="fn" placeholder="Rahul Mehta"/></div>
+          <div class="fg"><label>Phone Number *</label><input type="tel" id="fp" placeholder="+91 98765 43210"/></div>
+        </div>
+        <div class="fg"><label>Email Address</label><input type="email" id="fe" placeholder="rahul@email.com"/></div>
+        <div class="frow">
+          <div class="fg">
+            <label>Service Required *</label>
+            <select id="fs">
+              <option value="">— Select a service —</option>
+              <option>TV Repair</option>
+              <option>Wall Mount / Installation</option>
+              <option>Smart TV Setup</option>
+              <option>Panel Replacement</option>
+              <option>Power Board / No Display</option>
+              <option>Free Diagnosis</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="fg"><label>TV Brand &amp; Size</label><input type="text" id="fm" placeholder='e.g. Samsung 55"'/></div>
+        </div>
+        <div class="fg"><label>Describe the Issue</label><textarea id="fmsg" placeholder="Tell us what's happening with your TV…"></textarea></div>
+        <button class="fsub-btn" onclick="handleForm()">📅 Book a Technician Visit</button>
+      </div>
+      <div class="f-done" id="fd">
+        <div class="tick">✅</div>
+        <h4>Enquiry Received!</h4>
+        <p>Thank you! We'll call or WhatsApp you within a few hours to confirm your booking and visit time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-main">
+    <div class="ft-brand">
+      <a class="logo" href="#home" style="color:var(--white);">
+        <div class="logo-box">📺</div>
+        Display<span>Lab</span>
+      </a>
+      <p>Mumbai's trusted TV repair and home installation service. Certified technicians, doorstep visits, all brands covered.</p>
+      <div class="ft-social">
+        <a class="ft-s" href="https://wa.me/919999999999" style="background:#25d366; color:#fff;">💬</a>
+        <a class="ft-s" href="tel:+919999999999" style="background:#0f3460; color:#fff; border:1px solid #1e4d8c;">📞</a>
+        <a class="ft-s" href="mailto:hello@displaylab.in" style="background:#e8530a; color:#fff;">✉️</a>
+      </div>
+    </div>
+    <div class="ft-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#services">TV Repair</a></li>
+        <li><a href="#services">Wall Mounting</a></li>
+        <li><a href="#services">Smart TV Setup</a></li>
+        <li><a href="#services">Panel Replacement</a></li>
+        <li><a href="#services">Power Board Fix</a></li>
+        <li><a href="#services">Free Diagnosis</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#why">Why Choose Us</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h5>Contact Info</h5>
+      <div class="ft-ci"><span class="ft-ci-ico">📞</span><a href="tel:+919999999999" style="color:#6b80a0; text-decoration:none;">+91 99999 99999</a></div>
+      <div class="ft-ci"><span class="ft-ci-ico">✉️</span><a href="mailto:hello@displaylab.in" style="color:#6b80a0; text-decoration:none;">hello@displaylab.in</a></div>
+      <div class="ft-ci"><span class="ft-ci-ico">📍</span><span>Mumbai, Maharashtra</span></div>
+      <div class="ft-ci"><span class="ft-ci-ico">🕘</span><span>Mon – Sat: 9 AM – 8 PM</span></div>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <span>© 2025 Display Lab. All rights reserved.</span>
+    <span>Made with ❤️ in Mumbai</span>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(e => {
+    e.forEach(el => { if (el.isIntersecting) { el.target.classList.add('visible'); io.unobserve(el.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  function handleForm() {
+    const n = document.getElementById('fn').value.trim();
+    const p = document.getElementById('fp').value.trim();
+    const s = document.getElementById('fs').value;
+    if (!n || !p || !s) { alert('Please fill in your name, phone number and the service required.'); return; }
+    document.getElementById('the-form').style.display = 'none';
+    document.getElementById('fd').style.display = 'block';
+  }
+</script>
+</body>
+</html>
